@@ -1,0 +1,38 @@
+<h2>User Details</h2>
+
+<!-- Home Button -->
+<button routerLink="/book-list">🏠 Home</button>
+
+<div *ngIf="user; else loading">
+  <div *ngIf="!editMode">
+    <p><strong>Username:</strong> {{ user.userName }}</p>
+    <p><strong>Name:</strong> {{ user.name }}</p>
+    <p><strong>Email:</strong> {{ user.email || 'N/A' }}</p>
+    <p><strong>Address:</strong> {{ user.address || 'N/A' }}</p>
+    <p><strong>Role:</strong> {{ user.role }}</p>
+
+    <button (click)="toggleEdit()">Edit</button>
+  </div>
+
+  <!-- Edit Form -->
+  <form *ngIf="editMode" (ngSubmit)="updateProfile()">
+    <label>Name: <input [(ngModel)]="user.name" name="name" /></label><br />
+    <label>Email: <input [(ngModel)]="user.email" name="email" /></label><br />
+    <label>Address: <input [(ngModel)]="user.address" name="address" /></label><br />
+    
+    <label>New Password: 
+      <input type="password" [(ngModel)]="user.newPassword" name="newPassword" />
+    </label><br />
+    
+    <label>Confirm Password: 
+      <input type="password" [(ngModel)]="user.confirmPassword" name="confirmPassword" />
+    </label><br />
+
+    <button type="submit">Save</button>
+    <button type="button" (click)="toggleEdit()">Cancel</button>
+  </form>
+</div>
+
+<ng-template #loading>
+  <p>Loading user details...</p>
+</ng-template>

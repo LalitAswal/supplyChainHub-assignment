@@ -1,0 +1,15 @@
+<h2>Borrowed Books</h2>
+<button routerLink="/book-list">🏠 Home</button>
+<div *ngIf="borrowedBooks.length === 0">
+  <p>No books borrowed.</p>
+</div>
+
+<ul *ngIf="borrowedBooks.length > 0">
+  <li *ngFor="let item of borrowedBooks">
+    <strong>{{ item.book.title }}</strong> by {{ item.book.author }}<br />
+    Borrowed On: {{ item.borrowDate | date:'medium' }}<br />
+
+    <button (click)="returnBook(item._id)">Return</button>
+    <hr />
+  </li>
+</ul>

@@ -1,0 +1,25 @@
+<h2>Books List</h2>
+
+<!-- Top buttons -->
+<button routerLink="/user-details">View Profile</button>
+<button routerLink="/borrowed-books">Borrowed Books</button>
+<button *ngIf="role === 'Admin'" routerLink="/add-book">Add Book</button>
+<button (click)="logout()">Logout</button>
+
+<ul>
+  <li *ngFor="let book of books">
+    <strong>{{ book.title }}</strong> by {{ book.author }}<br />
+    {{ book.description }}<br />
+    Total Copies: {{ book.totalCopies }}, Available: {{ book.availableCopies }}<br />
+
+    <button (click)="borrowBook(book._id)">Borrow</button>
+
+    <!-- Admin-only options -->
+    <ng-container *ngIf="role === 'Admin'">
+      <button (click)="editBook(book)">Update</button>
+      <button (click)="deleteBook(book._id)">Delete</button>
+    </ng-container>
+
+    <hr />
+  </li>
+</ul>
